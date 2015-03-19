@@ -3,11 +3,11 @@ idevops.net constructed at zone GD1 of QingCloud.
 
 # Computer
 
-ID | Host Name ( idevops.net ) | Image (ID) | Network | Size
--- | ------------------------- | ---------- | ------- | ----
-i-tvkhhb1r | ldap chef | ubuntu 14.04 (trustysrvx64c) | (devo-vxnet) / 192.168.200.5 | 2C 4G
-i-99ouavas | build ci | centos 7 (centos7x64b) | (devo-vxnet) / 192.168.200.3 | 2C 4G
-i-j5zkfqhl | web idevops | centos 7 (centos7x64b) | (devo-vxnet) / 192.168.200.2 | 2C 4G
+ID| Host Name ( idevops.net )| Image (ID)| Network| Size
+--|--------------------------|-----------|--------|-----
+i-tvkhhb1r| ldap chef| ubuntu 14.04 (trustysrvx64c)| (devo-vxnet) / 192.168.200.5| 2C 4G
+i-99ouavas| build ci| centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.3| 2C 4G
+i-j5zkfqhl| web idevops| centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.2| 2C 4G
 
 ### /etc/hosts
 
