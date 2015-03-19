@@ -3,8 +3,8 @@ idevops.net constructed at zone GD1 of QingCloud.
 
 # Computer
 
-|ID| Host Name ( idevops.net )| Image (ID)| Network| Size|
-|--|--------------------------|-----------|--------|-----|
+|ID        | Host Name ( idevops.net )| Image (ID)                       | Network                                | Size   |
+|----------|--------------------------|----------------------------------|----------------------------------------|-------|
 |i-tvkhhb1r| ldap chef| ubuntu 14.04 (trustysrvx64c)| (devo-vxnet) / 192.168.200.5| 2C 4G|
 |i-99ouavas| build ci| centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.3| 2C 4G|
 |i-j5zkfqhl| web idevops| centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.2| 2C 4G|
@@ -18,15 +18,15 @@ idevops.net constructed at zone GD1 of QingCloud.
 ```
 ### Services
 
-VM ID|IP|Services
------|--|--------
+VM ID     | IP          | Services
+----------|-------------|-----------
 i-j5zkfqhl|192.168.200.2| httpd
 i-99ouavas|192.168.200.3| jenkins, gerrit
 i-tvkhhb1r|192.168.200.5| ldap, chef
 
 # Router
-ID|	Name|	Status|Type|	EIP|Private IP
---|-----|-------|----|-----|-----------
+ID          |	Name  |	Status  |Type  |	EIP            |Private IP
+------------|-------|---------|------|-----------------|---------------
 rtr-gmrunkjf|	devo_r|	  Active|	Small|**121.201.13.44**|192.168.200.1
 
 ## Forward Table
@@ -46,8 +46,8 @@ Priority|	Protocol|	Action|	Start Port|	End Port|	Source IP
 3|	TCP	|Accept|	33443||
 
 # Volumes
-ID|	Name|	Status| Instances/Device|	Size (GB)|	Type
---|-----|-------|-----------------|----------|-------
+ID          |	Name |	Status  | Instances/Device|	Size (GB)|	Type
+------------|------|----------|-----------------|----------|-------
 vom-toojo38e|	ci|	  In Use|	(build)/dev/sdc |100|	High Capacity
 vom-8jf5awac|	disk1|	  In Use|	(web)/dev/sdb | 100|	High Capacity
 
