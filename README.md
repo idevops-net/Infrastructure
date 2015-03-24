@@ -21,8 +21,12 @@ idevops.net constructed at zone GD1 of QingCloud.
 VM ID     | IP          | Services
 ----------|-------------|-----------
 i-j5zkfqhl|192.168.200.2| httpd
-i-99ouavas|192.168.200.3| jenkins, gerrit
+i-99ouavas|192.168.200.3| jenkins, gerrit, docker-registry
 i-tvkhhb1r|192.168.200.5| ldap, chef
+
+```
+* openldap server and phpldapadmin are running on `192.168.200.5` as docker container.
+```
 
 # Router
 ID          |	Name  |	Status  |Type  |	EIP            |Private IP
