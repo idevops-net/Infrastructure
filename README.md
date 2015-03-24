@@ -54,6 +54,7 @@ ID          |	Name |	Status  | Instances/Device|	Size (GB)|	Type
 ------------|------|----------|-----------------|----------|-------
 vom-toojo38e|	ci|	  In Use|	(build)/dev/sdc |100|	High Capacity
 vom-8jf5awac|	disk1|	  In Use|	(web)/dev/sdb | 100|	High Capacity
+vom-yefsvdzp|ldap|  In Use| (ldap)/dev/sdc | 100|	High Capacity
 
 ## Mount points
 
@@ -79,4 +80,16 @@ sdb      8:16   0    4G  0 disk [SWAP]
 sdc      8:32   0  100G  0 disk
 ├─sdc1   8:33   0   50G  0 part /build
 └─sdc2   8:34   0   50G  0 part /var/lib/jenkins
+```
+
+* **192.168.200.5 (chef/ldap)**
+```
+root@ldap:~# lsblk
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
+sda      8:0    0    20G  0 disk
+└─sda1   8:1    0    20G  0 part /
+sdb      8:16   0     4G  0 disk [SWAP]
+sdc      8:32   0   100G  0 disk
+├─sdc1   8:33   0    50G  0 part /data
+└─sdc2   8:34   0    50G  0 part
 ```
