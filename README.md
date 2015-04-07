@@ -8,6 +8,7 @@ idevops.net constructed at zone GD1 of QingCloud.
 |i-tvkhhb1r| ldap chef| ubuntu 14.04 (trustysrvx64c)| (devo-vxnet) / 192.168.200.5| 2C 4G|
 |i-99ouavas| build ci| centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.3| 2C 4G|
 |i-j5zkfqhl| web idevops| centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.2| 2C 4G|
+|i-iv8w9pok| jenkins slave | centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.6| 2C 4G|
 
 ### /etc/hosts
 
@@ -23,6 +24,7 @@ VM ID     | IP          | Services
 i-j5zkfqhl|192.168.200.2| httpd
 i-99ouavas|192.168.200.3| jenkins, gerrit, docker-registry
 i-tvkhhb1r|192.168.200.5| ldap, chef
+i-iv8w9pok|192.168.200.6| jenkins centos7 slave
 
 ```
 * openldap server and phpldapadmin are running on `192.168.200.5` as docker container.
