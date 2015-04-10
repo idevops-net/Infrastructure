@@ -22,12 +22,23 @@ idevops.net constructed at zone GD1 of QingCloud.
 VM ID     | IP          | Services
 ----------|-------------|-----------
 i-j5zkfqhl|192.168.200.2| httpd
-i-99ouavas|192.168.200.3| jenkins, gerrit, docker-registry
-i-tvkhhb1r|192.168.200.5| ldap, chef
+i-99ouavas|192.168.200.3| jenkins, zuul, docker-registry
+i-tvkhhb1r|192.168.200.5| ldap, chef, phpldapadmin
 i-iv8w9pok|192.168.200.6| jenkins centos7 slave
 
 ```
-* openldap server and phpldapadmin are running on `192.168.200.5` as docker container.
+* openldap server and phpldapadmin are running on `192.168.200.5` as docker container. LDAP data is under /data/slapd as docker container volume.
+  $ docker run -d -p 389:389 -v /data/slapd/config:/etc/ldap/slapd.d -v /data/slapd/database:/var/lib/ldap -e LDAP_ORGANISATION=Zerbtech -e LDAP_DOMAIN="idevops.net" -e LDAP_ADMIN_PASSWORD="adc2tek" -e SERVER_NAME="ldap" -e USE_TLS=false --name ldap 192.168.200.3:5000/openldap:0.10.1
+  $ docker run -p 4403:443 -e LDAP_HOSTS=192.168.200.5 -e SSL_CRT_FILENAME=ldap.crt -e SSL_KEY_FILENAME=ldap.key -v /var/opt/chef-server/nginx/ca:/osixia/phpldapadmin/apache2/ssl -d --name phpldapadmin 192.168.200.3:5000/phpldapadmin:0.5.0
+
+* gerrit server is running on `192.168.200.5` as docker container. Gerrit data is under /data/gerrit as docker container volume.
+  $ docker run -t -d --name="gerrit" -p 8080:8080 -p 29418:29418 -e AUTH_TYPE=LDAP -e GERRIT_URL=http://review.idevops.net:33080 -e LDAP_SERVER=ldap://192.168.200.5 -e LDAP_ACCOUNT_BASE="ou=people,dc=idevops,dc=net" -e REPLICATE_KEY=/home/gerrit2/.ssh/ci_rsa -e REPLICATE_USER=idevops-ci -v /data/gerrit:/home/gerrit2/gerrit -v /data/ssh_key:/home/gerrit2/.ssh 192.168.200.3:5000/gerrit:0.0.2
+
+* Zuul server is running on `192.168.200.3` as docker container.
+  $ docker run --name zuul-server -d -e GERRIT_SERVER=192.168.200.5 -e GERRIT_URL=http://review.idevops.net:33080 -e JENKINS_SSH_KEY=/home/jenkins/.ssh/ci_rsa -v /build/ssh_key/ssh:/home/jenkins/.ssh -v /root/ci/project-config/zuul:/etc/zuul-layout -p 4730:4730 192.168.200.3:5000/zuul:0.0.2
+
+* Docker image registry is running on `192.168.200.3` as docker container. Image data is under /build/docker_registry as docker container volume.
+  $ docker run -v /build/docker_registry/:/build/docker_registry -e STORAGE_PATH=/build/docker_registry -e SEARCH_BACKEND=sqlalchemy -p 5000:5000 --name docker_registry -t -d registry
 ```
 
 # Router
