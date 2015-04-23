@@ -9,6 +9,7 @@ idevops.net constructed at zone GD1 of QingCloud.
 |i-99ouavas| build ci| centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.3| 2C 4G|
 |i-j5zkfqhl| web idevops| centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.2| 2C 4G|
 |i-iv8w9pok| jenkins slave | centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.6| 2C 4G|
+|i-dy8hm7fs| nalanda | centos 7 (centos7x64b)| (devo-vxnet) / 192.168.200.7| 2C 8G|
 
 ### /etc/hosts
 
@@ -16,6 +17,7 @@ idevops.net constructed at zone GD1 of QingCloud.
 192.168.200.5   ldap chef chef.idevops.net ldap.idevops.net
 192.168.200.3   ci build ci.idevops.net build.idevops.net
 192.168.200.2   idevops web web.idevops.net www.idevops.net idevops.net
+192.168.200.7   mesos
 ```
 ### Services
 
@@ -25,6 +27,7 @@ i-j5zkfqhl|192.168.200.2| httpd
 i-99ouavas|192.168.200.3| jenkins, zuul, docker-registry
 i-tvkhhb1r|192.168.200.5| ldap, chef, phpldapadmin
 i-iv8w9pok|192.168.200.6| jenkins centos7 slave
+i-iv8w9pok|192.168.200.7| zookeeper cluster, mesos master
 
 ```
 * openldap server and phpldapadmin are running on `192.168.200.5` as docker container. LDAP data is under /data/slapd as docker container volume.
@@ -36,6 +39,10 @@ i-iv8w9pok|192.168.200.6| jenkins centos7 slave
 
 * Zuul server is running on `192.168.200.3` as docker container.
   $ docker run --name zuul-server -d -e GERRIT_SERVER=192.168.200.5 -e GERRIT_URL=http://review.idevops.net:33080 -e JENKINS_SSH_KEY=/home/jenkins/.ssh/ci_rsa -v /build/ssh_key/ssh:/home/jenkins/.ssh -v /root/ci/project-config/zuul:/etc/zuul-layout -p 4730:4730 192.168.200.3:5000/zuul:0.0.2
+
+* Zookeeper cluster is running on `192.168.200.7` as docker container.
+  $ git clone https://github.com/power-stack/nalanda.git
+  $ cd nalanda/docker-scripts && ./docker-zookeeper
 
 * Docker image registry is running on `192.168.200.3` as docker container. Image data is under /build/docker_registry as docker container volume.
   $ docker run -v /build/docker_registry/:/build/docker_registry -e STORAGE_PATH=/build/docker_registry -e SEARCH_BACKEND=sqlalchemy -p 5000:5000 --name docker_registry -t -d registry
