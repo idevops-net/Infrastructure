@@ -27,7 +27,27 @@ i-j5zkfqhl|192.168.200.2| httpd
 i-99ouavas|192.168.200.3| jenkins, zuul, docker-registry
 i-tvkhhb1r|192.168.200.5| ldap, chef, phpldapadmin
 i-iv8w9pok|192.168.200.6| jenkins centos7 slave
-i-iv8w9pok|192.168.200.7| zookeeper cluster, mesos master
+i-iv8w9pok|192.168.200.7| nalanda
+
+Host          | Container Name | IP            | Port             | Services
+--------------|----------------|---------------|------------------|---------
+192.168.200.7 |zookeeper_1     |               | 2181, 2888, 3888 | Zookeeper cluster
+192.168.200.7 |zookeeper_2     |               | 2182, 2889, 3889 | Zookeeper cluster
+192.168.200.7 |zookeeper_3     |               | 2183, 2890, 3890 | Zookeeper cluster
+192.168.200.7 |mesos_master_1  |192.168.200.20 |                  | Mesos master
+192.168.200.7 |mesos_master_2  |192.168.200.21 |                  | Mesos master
+192.168.200.7 |mesos_master_3  |192.168.200.22 |                  | Mesos master
+192.168.200.7 |mesos_slave     |192.168.200.30 |                  | Mesos slave
+192.168.200.3 |mesos_slave     |192.168.200.31 |                  | Mesos slave
+192.168.200.6 |mesos_slave     |192.168.200.32 |                  | Mesos slave
+192.168.200.7 |marathon_1      |192.168.200.40 |                  | Mesos marathon
+192.168.200.7 |marathon_2      |192.168.200.41 |                  | Mesos marathon
+192.168.200.7 |chronos_1       |192.168.200.42 |                  | Mesos chronos
+192.168.200.7 |chronos_2       |192.168.200.43 |                  | Mesos chronos
+192.168.200.7 |hdfs_namenode   |192.168.200.23 |                  | Hadoop HDFS Namenode
+192.168.200.7 |hdfs_datanode_1 |192.168.200.24 |                  | Hadoop HDFS Datanode
+192.168.200.7 |hdfs_datanode_2 |192.168.200.25 |                  | Hadoop HDFS Datanode
+192.168.200.7 |hdfs_datanode_3 |192.168.200.26 |                  | Hadoop HDFS Datanode
 
 ```
 * openldap server and phpldapadmin are running on `192.168.200.5` as docker container. LDAP data is under /data/slapd as docker container volume.
